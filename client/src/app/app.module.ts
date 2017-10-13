@@ -8,6 +8,13 @@ import { AppRouterModule } from './app.router';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { FooterComponent } from './common/partials/footer/footer.component';
+import { UserService } from './common/services/user.service';
+import { AppAuthModule } from './app.auth';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { CapitalizePipe } from './common/pipes/capitalize.pipe';
+import { AuthService } from './common/services/auth.service';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +23,18 @@ import { FooterComponent } from './common/partials/footer/footer.component';
     LandingComponent,
     LoginComponent,
     RegisterComponent,
-    FooterComponent
+    FooterComponent,
+    CapitalizePipe,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
-    AppRouterModule
+    FormsModule,
+    AppRouterModule,
+    AppAuthModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

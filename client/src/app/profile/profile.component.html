@@ -1,0 +1,67 @@
+<div class="wrapper">
+  <div class="page-header page-header-small">
+    <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg5.jpg') ;">
+    </div>
+    <div class="content-center">
+      <div class="photo-container">
+        <img src="../assets/img/ryan.jpg" alt="">
+      </div>
+      <h3 class="title">{{ user?.name }}</h3>
+      <p class="category">{{ user?.username }}</p>
+      <div class="content">
+        <div class="social-description">
+          <h2>{{ user?.rankName() }}</h2>
+          <p>Site Rank</p>
+        </div>
+        <div class="social-description">
+          <h2>${{ user?.dues_paid }}</h2>
+          <p>Paid Dues</p>
+        </div>
+        <div class="social-description">
+          <h2>{{ user?.title }}</h2>
+          <p>Club Title</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container">
+      <div class="button-container">
+        <a href="#button" class="btn btn-primary btn-round btn-lg" *ngIf="currentUser?.rank < 2">Edit User</a>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="title text-center">Game Votes</h2>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-block">
+                  <h6 class="category text-danger">
+                    <i class="now-ui-icons media-2_sound-wave"></i> Popular
+                  </h6>
+                  <h5 class="card-title">
+                    <a href="https://boardgamegeek.com/boardgame/197831/dark-souls-board-game">Dark Souls</a>
+                  </h5>
+                  <p class="card-description">
+                    The Dark Souls board game is a brutally hard exploration miniatures game for 1-4 players. Prepare to die.
+                  </p>
+                  <div class="card-footer">
+                    <div class="author">
+                      <span>Jackson Yeager</span>
+                    </div>
+                    <div class="stats stats-right">
+                      <i class="now-ui-icons ui-2_favourite-28"></i> 342
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

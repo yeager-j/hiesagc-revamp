@@ -1,5 +1,8 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { User } from './common/classes/user';
+import { UserService } from './common/services/user.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
@@ -8,24 +11,30 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class AppComponent implements OnInit{
   @ViewChild('wrapper') wrapper: ElementRef;
+  public static currentUser: Observable<User>;
 
   classMap = {
-    "/landing": "landing-page",
-    "/register": "signup-page",
-    "/login": "login-page"
+    "landing": "landing-page",
+    "register": "signup-page",
+    "login": "login-page",
+    "profile": "profile-page"
   };
 
-  constructor(private router: Router, private renderer: Renderer2) {
+  constructor(private router: Router, private renderer: Renderer2, private userService: UserService) {
 
   }
 
   ngOnInit() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        if (this.classMap.hasOwnProperty(event.url)) {
-          this.renderer.addClass(this.wrapper.nativeElement, this.classMap[event.url]);
+        let url = event.url.split('/')[1];
+
+        if (this.classMap.hasOwnProperty(url)) {
+          this.renderer.addClass(this.wrapper.nativeElement, this.classMap[url]);
         }
       }
+
+      AppComponent.currentUser = this.userService.getCurrent();
     });
   }
 }

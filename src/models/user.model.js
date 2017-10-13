@@ -4,6 +4,10 @@ let jwt = require('jsonwebtoken');
 let config = require('../../config/config.json');
 
 let userSchema = mongoose.Schema({
+    username: {
+        required: true,
+        type: String
+    },
     name: {
         required: true,
         type: String

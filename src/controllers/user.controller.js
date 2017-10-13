@@ -11,9 +11,16 @@ module.exports = {
                 deleted: false
             });
         } catch (e) {
-            console.log(e);
-            res.status(404);
-            res.json({message: 'Could not find that user.'});
+            try {
+                user = await User.findOne({
+                    username: req.params.id,
+                    deleted: false
+                });
+            } catch (e) {
+                console.log(e);
+                res.status(404);
+                res.json({message: 'Could not find that user.'});
+            }
         }
 
         res.status(200);
@@ -42,6 +49,7 @@ module.exports = {
 
         if (validation.passed) {
             let user = new User({
+                username: req.body.username,
                 name: req.body.name,
                 email: req.body.email
             });
@@ -78,6 +86,7 @@ module.exports = {
 
             try {
                 user = await User.findById(id);
+                user.username = req.body.username;
                 user.name = req.body.name;
                 user.email = req.body.email;
                 user.rank = req.body.rank;
